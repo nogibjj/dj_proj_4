@@ -17,5 +17,5 @@ def predict_attrition():
 
 
 if __name__ == "__main__": 
-    train_models()
+    predict_attrition()
 
