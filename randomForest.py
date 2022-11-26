@@ -1,10 +1,20 @@
 # random forest classifier
 
 from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
 
-def randomforest_clf():
+
+def randomforest_clf(df):
+    df_new = df.drop(['EmployeeID', 'EmployeeCount', 'Over18', 'StandardHours'], axis=1)
+
+    X = df_new.drop(['Attrition'], axis=1)
+    X = pd.get_dummies(X)
+
+    y = df_new[['Attrition']]
+    y = pd.get_dummies(y).drop(['Attrition_No'], axis=1).rename(columns={'Attrition_Yes':'Attrition'})
+
     clf = RandomForestClassifier(n_estimators=100, random_state=0)
-    clf.fit(X, y)
+    clf.fit(X, y.values.ravel())
 
     test_df = pd.read_csv("test.csv")
 

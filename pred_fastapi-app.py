@@ -16,12 +16,12 @@ async def add(num1: int, num2: int):
     total = num1 + num2
     return {"total": total}
 
-@app.get("/pred/{player}")
-async def pred(player: str):
+@app.get("/pred")
+async def pred():
     """predict whether a certain person quits"""
 
-    prediction = predict_impact(player)
-    return {"{}".format(player): prediction}
+    payload = predict_attrition()
+    return payload
 
 
 if __name__ == '__main__':

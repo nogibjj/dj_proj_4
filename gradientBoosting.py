@@ -1,9 +1,20 @@
 # Boosted Decision Tree
 
 from sklearn.ensemble import GradientBoostingClassifier
-def gradientboosting_clf():
+import pandas as pd
+
+
+def gradientboosting_clf(df):
+    df_new = df.drop(['EmployeeID', 'EmployeeCount', 'Over18', 'StandardHours'], axis=1)
+
+    X = df_new.drop(['Attrition'], axis=1)
+    X = pd.get_dummies(X)
+
+    y = df_new[['Attrition']]
+    y = pd.get_dummies(y).drop(['Attrition_No'], axis=1).rename(columns={'Attrition_Yes':'Attrition'})
+
     clf = GradientBoostingClassifier(n_estimators=100, random_state=0)
-    clf.fit(X, y)
+    clf.fit(X, y.values.ravel())
 
     test_df = pd.read_csv("test.csv")
 
