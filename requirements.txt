@@ -1,0 +1,17 @@
+pandas==1.5.0
+numpy==1.23.3
+scikit-learn==1.1.2
+matplotlib==3.6.0
+
+pytest
+pylint
+click
+
+ipython
+fastapi
+uvicorn[standard]
+
+s3fs
+bokeh
+streamlit
+#sklearn
